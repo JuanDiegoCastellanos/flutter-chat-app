@@ -17,7 +17,7 @@ class LoginPage extends StatelessWidget {
           //efecto como de rebote
           physics: const BouncingScrollPhysics(),
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.9,
+            //height: MediaQuery.of(context).size.height * 0.9,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const <Widget>[
