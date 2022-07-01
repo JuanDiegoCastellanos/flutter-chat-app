@@ -31,12 +31,15 @@ class CustomInput extends StatelessWidget {
             )
           ]),
       child: TextField(
+        textAlignVertical: TextAlignVertical.bottom,
         obscureText: isPassword,
         controller: textController,
         autocorrect: false,
         keyboardType: keyboardType,
         decoration: InputDecoration(
-            prefixIcon: Icon(icon),
+            prefixIcon: Icon(
+              icon,
+            ),
             focusedBorder: InputBorder.none,
             border: InputBorder.none,
             hintText: placeHolder),

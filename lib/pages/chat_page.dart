@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:chat_socket_mongodb/widgets/chat_message.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +14,6 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   final _focusNode = FocusNode();
 
   final List<ChatMessage> _messages = <ChatMessage>[
-    // const ChatMessage(text: 'Juan, Hola', uid: '123'),
     // const ChatMessage(text: 'Cómo estás?', uid: '12'),
     // const ChatMessage(text: 'Donde estás?', uid: '123'),
     // const ChatMessage(text: 'Hoy toca full flutter', uid: '123'),
@@ -131,7 +128,7 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   }
 
   _handleSubmit(String text) {
-    if (text.isNotEmpty) return;
+    if (text.isEmpty) return;
     debugPrint(text);
     _textController.clear();
     _focusNode.requestFocus();

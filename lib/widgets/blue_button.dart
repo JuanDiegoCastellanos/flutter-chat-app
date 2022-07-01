@@ -8,12 +8,14 @@ class BlueButton extends StatelessWidget {
   }) : super(key: key);
 
   final String textButton;
-  final VoidCallback onPressed;
+  final dynamic onPressed;
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
       elevation: 2,
+      disabledColor: Colors.grey[600],
+      disabledTextColor: Colors.black,
       highlightElevation: 5,
       color: Colors.blue,
       shape: const StadiumBorder(),

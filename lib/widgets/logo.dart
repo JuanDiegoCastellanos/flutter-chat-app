@@ -9,9 +9,8 @@ class Logo extends StatelessWidget {
     return Center(
       child: Container(
         width: 150,
-        margin: const EdgeInsets.only(top: 10),
+        margin: const EdgeInsets.only(top: 50),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             const Image(
               image: AssetImage('assets/tag-logo.png'),

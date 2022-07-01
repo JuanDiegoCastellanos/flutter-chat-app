@@ -1,4 +1,6 @@
+import 'package:chat_socket_mongodb/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -39,17 +41,24 @@ class _UsuariosPageState extends State<UsuariosPage> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
+    final user = authService.usuario;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
-          'Mi Nombre',
-          style: TextStyle(color: Colors.black),
+        title: Text(
+          user!.nombre,
+          style: const TextStyle(color: Colors.black),
         ),
         elevation: 1,
         backgroundColor: Colors.white,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            //Desconectarnos del socket server
+            Navigator.pushReplacementNamed(context, 'login');
+            AuthService.deleteToken();
+          },
           icon: const Icon(Icons.exit_to_app, color: Colors.black),
         ),
         actions: <Widget>[
@@ -63,6 +72,7 @@ class _UsuariosPageState extends State<UsuariosPage> {
       body: SmartRefresher(
         controller: _refreshController,
         enablePullDown: true,
+        enablePullUp: false,
         header: WaterDropHeader(
           refresh: const CircularProgressIndicator(
             color: Colors.lightGreen,

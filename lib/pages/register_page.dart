@@ -1,7 +1,10 @@
+import 'package:chat_socket_mongodb/helpers/mostrar_alerta.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:chat_socket_mongodb/services/auth_service.dart';
 import 'package:chat_socket_mongodb/widgets/blue_button.dart';
 import 'package:chat_socket_mongodb/widgets/custom_input.dart';
-import 'package:flutter/material.dart';
-
 import '../widgets/labels.dart';
 import '../widgets/logo.dart';
 
@@ -49,6 +52,8 @@ class __FormState extends State<_Form> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
+
     return Container(
       margin: const EdgeInsets.only(top: 40),
       padding: const EdgeInsets.symmetric(horizontal: 50),
@@ -77,10 +82,25 @@ class __FormState extends State<_Form> {
           //   child: const Text('Press here'),
           // ),
           BlueButton(
-              textButton: 'Ingresar',
-              onPressed: () {
-                debugPrint(emailCtrl.text + passwordCtrl.text);
-              })
+              textButton: 'Crear cuenta',
+              onPressed: authService.autenticando
+                  ? null
+                  : () async {
+                      print(emailCtrl.text);
+                      print(passwordCtrl.text);
+                      print(nameCtrl.text);
+                      final registroOk = await authService.register(
+                          nameCtrl.text.trim(),
+                          emailCtrl.text.trim(),
+                          passwordCtrl.text.trim());
+
+                      if (registroOk == true) {
+                        Navigator.pushReplacementNamed(context, 'usuarios');
+                      } else {
+                        mostrarAlerta(
+                            context, 'Registro incorrecto', registroOk);
+                      }
+                    })
         ],
       ),
     );
